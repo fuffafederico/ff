@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Federico Fuffa</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 20% 30%, #1a1a1a 0%, transparent 35%),
+        radial-gradient(circle at 80% 70%, #222 0%, transparent 35%),
+        #050505;
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: crosshair;
+    }
+
+    /* GRID DI SFONDO */
+    .grid {
+      position: fixed;
+      inset: 0;
+
+      background-image:
+        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+
+      background-size: 60px 60px;
+
+      animation: gridMove 15s linear infinite;
+    }
+
+    @keyframes gridMove {
+      from {
+        transform: translate(0, 0);
+      }
+
+      to {
+        transform: translate(60px, 60px);
+      }
+    }
+
+    /* LUCE CHE SEGUE IL MOUSE */
+    .light {
+      position: fixed;
+
+      width: 500px;
+      height: 500px;
+
+      border-radius: 50%;
+
+      background: radial-gradient(
+        circle,
+        rgba(255,255,255,.10),
+        transparent 65%
+      );
+
+      transform: translate(-50%, -50%);
+
+      pointer-events: none;
+
+      transition:
+        left .08s linear,
+        top .08s linear;
+
+      filter: blur(20px);
+    }
+
+    /* CONTENUTO CENTRALE */
+    .hero {
+      position: relative;
+      z-index: 10;
+
+      text-align: center;
+    }
+
+    /* TITOLO */
+    h1 {
+      font-size: clamp(60px, 11vw, 180px);
+
+      font-weight: 900;
+
+      letter-spacing: -0.07em;
+
+      line-height: .85;
+
+      position: relative;
+
+      animation: float 4s ease-in-out infinite;
+
+      user-select: none;
+    }
+
+    h1 span {
+      display: inline-block;
+
+      animation:
+        letters 3s ease-in-out infinite;
+    }
+
+    h1 span:nth-child(2) {
+      animation-delay: .05s;
+    }
+
+    h1 span:nth-child(3) {
+      animation-delay: .10s;
+    }
+
+    h1 span:nth-child(4) {
+      animation-delay: .15s;
+    }
+
+    h1 span:nth-child(5) {
+      animation-delay: .20s;
+    }
+
+    h1 span:nth-child(6) {
+      animation-delay: .25s;
+    }
+
+    h1 span:nth-child(7) {
+      animation-delay: .30s;
+    }
+
+    @keyframes letters {
+      0%, 100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+      }
+
+      50% {
+        transform: translateY(-12px) scale(1.01);
+      }
+    }
+
+    /* LINEA */
+    .line {
+      width: 0;
+
+      height: 1px;
+
+      background: white;
+
+      margin: 35px auto 0;
+
+      animation:
+        line 2s ease forwards .5s;
+    }
+
+    @keyframes line {
+      to {
+        width: 180px;
+      }
+    }
+
+    /* SOTTOTITOLO */
+    .subtitle {
+      margin-top: 20px;
+
+      font-size: 12px;
+
+      letter-spacing: .5em;
+
+      text-transform: uppercase;
+
+      opacity: 0;
+
+      animation:
+        appear 2s forwards 1s;
+    }
+
+    /* EMAIL */
+    .email {
+      margin-top: 14px;
+
+      font-size: 13px;
+
+      letter-spacing: .08em;
+
+      opacity: 0;
+
+      animation:
+        appear 2s forwards 1.3s;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+
+        transform:
+          translateY(20px);
+      }
+
+      to {
+        opacity: .5;
+
+        transform:
+          translateY(0);
+      }
+    }
+
+    /* CERCHI */
+    .circle {
+      position: absolute;
+
+      border:
+        1px solid rgba(255,255,255,.1);
+
+      border-radius: 50%;
+
+      pointer-events: none;
+    }
+
+    .circle1 {
+      width: 600px;
+      height: 600px;
+
+      animation:
+        rotate 20s linear infinite;
+    }
+
+    .circle2 {
+      width: 800px;
+      height: 800px;
+
+      animation:
+        rotateReverse 30s linear infinite;
+    }
+
+    .circle3 {
+      width: 1000px;
+      height: 1000px;
+
+      border-style: dashed;
+
+      animation:
+        rotate 45s linear infinite;
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes rotateReverse {
+      from {
+        transform: rotate(360deg);
+      }
+
+      to {
+        transform: rotate(0deg);
+      }
+    }
+
+    /* PARTICELLE */
+    .particle {
+      position: fixed;
+
+      width: 3px;
+      height: 3px;
+
+      background: white;
+
+      border-radius: 50%;
+
+      pointer-events: none;
+
+      opacity: 0;
+
+      animation:
+        particle 3s linear forwards;
+    }
+
+    @keyframes particle {
+      0% {
+        opacity: 0;
+
+        transform:
+          translateY(0)
+          scale(0);
+      }
+
+      20% {
+        opacity: .7;
+      }
+
+      100% {
+        opacity: 0;
+
+        transform:
+          translateY(-100px)
+          scale(1.5);
+      }
+    }
+
+    /* SCAN LINE */
+    .scan {
+      position: fixed;
+
+      left: 0;
+
+      top: -10%;
+
+      width: 100%;
+
+      height: 150px;
+
+      background:
+        linear-gradient(
+          transparent,
+          rgba(255,255,255,.025),
+          transparent
+        );
+
+      animation:
+        scan 7s linear infinite;
+
+      pointer-events: none;
+    }
+
+    @keyframes scan {
+      from {
+        top: -20%;
+      }
+
+      to {
+        top: 120%;
+      }
+    }
+
+    /* ANIMAZIONE INIZIALE */
+    body::after {
+      content: "";
+
+      position: fixed;
+
+      inset: 0;
+
+      background: white;
+
+      z-index: 999;
+
+      pointer-events: none;
+
+      animation:
+        intro 1.3s cubic-bezier(.77,0,.18,1)
+        forwards;
+    }
+
+    @keyframes intro {
+      0% {
+        transform: translateY(0);
+      }
+
+      100% {
+        transform: translateY(-100%);
+      }
+    }
+
+    /* MOBILE */
+    @media (max-width: 600px) {
+
+      h1 {
+        font-size: 19vw;
+      }
+
+      .subtitle {
+        font-size: 9px;
+        letter-spacing: .35em;
+      }
+
+      .email {
+        font-size: 11px;
+      }
+
+      .circle1 {
+        width: 350px;
+        height: 350px;
+      }
+
+      .circle2 {
+        width: 500px;
+        height: 500px;
+      }
+
+      .circle3 {
+        width: 650px;
+        height: 650px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- SFONDO -->
+  <div class="grid"></div>
+
+  <!-- CERCHI ANIMATI -->
+  <div class="circle circle1"></div>
+  <div class="circle circle2"></div>
+  <div class="circle circle3"></div>
+
+  <!-- LUCE DEL MOUSE -->
+  <div class="light"></div>
+
+  <!-- CONTENUTO -->
+  <div class="hero">
+
+    <h1 id="title">
+      <span>F</span>
+      <span>E</span>
+      <span>D</span>
+      <span>E</span>
+      <span>R</span>
+      <span>I</span>
+      <span>C</span>
+      <span>O</span>
+      <br>
+      FUFFA
+    </h1>
+
+    <div class="line"></div>
+
+    <div class="subtitle">
+      Web Designer · Developer
+    </div>
+
+    <div class="email">
+      info@federicofuffa.it
+    </div>
+
+  </div>
+
+  <!-- SCAN LINE -->
+  <div class="scan"></div>
+
+
+  <script>
+
+    /* =========================================
+       LUCE + MOVIMENTO DEL TITOLO
+    ========================================= */
+
+    const light = document.querySelector(".light");
+    const title = document.querySelector("#title");
+
+    document.addEventListener("mousemove", (e) => {
+
+      /* Luce */
+
+      light.style.left =
+        e.clientX + "px";
+
+      light.style.top =
+        e.clientY + "px";
+
+
+      /* Movimento titolo */
+
+      const x =
+        (e.clientX / window.innerWidth - 0.5) * 15;
+
+      const y =
+        (e.clientY / window.innerHeight - 0.5) * 15;
+
+      title.style.transform = `
+        translate(${x}px, ${y}px)
+      `;
+
+    });
+
+
+    /* =========================================
+       PARTICELLE AUTOMATICHE
+    ========================================= */
+
+    function createParticle() {
+
+      const particle =
+        document.createElement("div");
+
+      particle.classList.add("particle");
+
+
+      particle.style.left =
+        Math.random() *
+        window.innerWidth +
+        "px";
+
+
+      particle.style.top =
+        Math.random() *
+        window.innerHeight +
+        "px";
+
+
+      const size =
+        Math.random() * 3 + 1;
+
+
+      particle.style.width =
+        size + "px";
+
+      particle.style.height =
+        size + "px";
+
+
+      document.body.appendChild(
+        particle
+      );
+
+
+      setTimeout(() => {
+
+        particle.remove();
+
+      }, 3000);
+
+    }
+
+
+    setInterval(
+      createParticle,
+      120
+    );
+
+
+    /* =========================================
+       EFFETTO CLICK
+    ========================================= */
+
+    document.addEventListener(
+      "click",
+      (e) => {
+
+        for (
+          let i = 0;
+          i < 15;
+          i++
+        ) {
+
+          const particle =
+            document.createElement("div");
+
+
+          particle.classList.add(
+            "particle"
+          );
+
+
+          particle.style.left =
+            e.clientX + "px";
+
+
+          particle.style.top =
+            e.clientY + "px";
+
+
+          const x =
+            (Math.random() - .5) *
+            200;
+
+
+          const y =
+            (Math.random() - .5) *
+            200;
+
+
+          particle.animate(
+
+            [
+              {
+                transform:
+                  "translate(0,0)",
+
+                opacity: 1
+              },
+
+              {
+                transform:
+                  `translate(${x}px, ${y}px)`,
+
+                opacity: 0
+              }
+            ],
+
+            {
+              duration: 800,
+
+              easing: "ease-out"
+            }
+
+          );
+
+
+          document.body.appendChild(
+            particle
+          );
+
+
+          setTimeout(() => {
+
+            particle.remove();
+
+          }, 800);
+
+        }
+
+      }
+    );
+
+  </script>
+
+</body>
+</html>
