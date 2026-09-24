@@ -2,6 +2,20 @@
   command = "npm run build"
   publish = "dist"
 
-# GA4 Measurement ID: set PUBLIC_GA_MEASUREMENT_ID in Site settings >
-# Environment variables. If unset, Google Analytics stays disabled
-# (see the GA_ID_VALID check in src/scripts/consent.js).
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

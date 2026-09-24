@@ -1,0 +1,133 @@
+---
+import Base from "../layouts/Base.astro";
+
+let version = "";
+try {
+  const r = await fetch("https://api.github.com/repos/fuffafederico/perno-releases/releases/latest", {
+    signal: AbortSignal.timeout(5000),
+    headers: { "User-Agent": "federicofuffa.it-build" },
+  });
+  if (r.ok) version = String((await r.json()).tag_name ?? "").replace(/^v/i, "");
+} catch {}
+
+
+// [name, highlighted]
+const skills = [
+  { t: "Web", l: [["HTML / CSS", 1], ["JavaScript", 1], ["Astro", 1], ["Node.js", 0], ["PHP", 0]] },
+  { t: "Software", l: [["Java", 0], ["SQL", 1]] },
+  { t: "Craft", l: [["UI/UX design", 1], ["Technical SEO", 1], ["Web performance", 1], ["Affinity Photo", 1], ["Branding", 0]] },
+  { t: "Tools", l: [["Git / GitHub", 1], ["npm", 1], ["Linux", 1]] },
+];
+
+const site = "https://federicofuffa.it";
+const jsonld = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": site + "/#federico",
+    name: "Federico Fuffa",
+    url: site + "/",
+    jobTitle: "Web and software developer",
+    description: "Computer Science student at the University of Camerino. Web and software.",
+    knowsAbout: ["Web development", "UI/UX design", "Technical SEO", "Web performance", "Branding"],
+    sameAs: ["https://www.linkedin.com/in/federico-fuffa-741a19331/"],
+    worksFor: { "@type": "Organization", name: "Levra Labs", url: "https://www.levra-labs.it/" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": site + "/#website",
+    url: site + "/",
+    name: "Federico Fuffa",
+    inLanguage: "en",
+    publisher: { "@id": site + "/#federico" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "Perno",
+    operatingSystem: "Windows",
+    applicationCategory: "UtilitiesApplication",
+    url: "https://apps.microsoft.com/detail/9n5t86tbmzns",
+    author: { "@id": site + "/#federico" },
+    ...(version ? { softwareVersion: version } : {}),
+  },
+];
+---
+<Base
+  title="Federico Fuffa · Web & software"
+  description="Federico Fuffa. Web and software. Computer Science student at the University of Camerino. Selected work: Levra Labs and Perno."
+  path="/"
+  jsonld={jsonld}
+>
+  <section class="hero" aria-labelledby="h1" style="padding-top:clamp(28px,5vw,64px);padding-bottom:0">
+    <div class="wrap">
+      <h1 id="h1"><span class="ln"><span>Federico</span></span><span class="ln"><span>Fuffa</span></span></h1>
+      <p class="hero-foot mono"><span>Web<span class="slash" aria-hidden="true">/</span>Software<span class="slash" aria-hidden="true">/</span>Digital</span><span>Italia</span></p>
+    </div>
+  </section>
+
+  <a class="levra" href="https://www.levra-labs.it/" target="_blank" rel="noopener" aria-label="Levra Labs, digital studio. Visit levra-labs.it">
+    <div class="wrap levra-in">
+      <div>
+        <span class="mono">Digital studio</span>
+        <h2>Levra Labs</h2>
+        <p class="levra-line">Websites, software and systems for businesses and professionals.</p>
+      </div>
+      <span class="go">Visit Levra Labs <span class="arr" aria-hidden="true">→</span></span>
+    </div>
+  </a>
+
+  <section id="work" aria-labelledby="w-h">
+    <div class="wrap">
+      <div class="frame"><h2 class="label" id="w-h">Projects</h2>
+        <div>
+          <article class="perno rv">
+            <img class="pl" src="/perno-logo.webp" width="240" height="231" alt="" loading="lazy" decoding="async" />
+            <div><h3>Perno</h3><span class="mono">Windows app · <span class="by">Built by me</span></span></div>
+            <a class="store" href="https://apps.microsoft.com/detail/9n5t86tbmzns" target="_blank" rel="noopener" aria-label="Get Perno from the Microsoft Store">
+              <span class="ms" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+              <span>Get it from Microsoft Store<small data-perno-version>{version && "v" + version}</small></span>
+            </a>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" aria-labelledby="a-h">
+    <div class="wrap">
+      <div class="frame"><h2 class="label" id="a-h">About</h2>
+        <div>
+          <p class="big rv">Computer Science student at the University of Camerino. I build websites and software.</p>
+          <p class="about-meta mono rv" style="--d:1">Italia</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" aria-labelledby="s-h">
+    <div class="wrap">
+      <div class="frame"><h2 class="label" id="s-h">Skills</h2>
+        <div class="skills">
+          {skills.map((s, i) => (
+            <div class="rv" style={`--d:${i}`}><h3>{s.t}</h3><ul>{s.l.map(([x, hi]) => <li class={hi ? "hi" : undefined}>{x}</li>)}</ul></div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" aria-labelledby="c-h">
+    <div class="wrap">
+      <div class="frame"><h2 class="label" id="c-h">Contact</h2>
+        <div>
+          <a class="mail ul rv" href="mailto:info@federicofuffa.it">info@federicofuffa.it</a>
+          <div class="contact-links rv" style="--d:1">
+            <a class="ul" href="https://www.linkedin.com/in/federico-fuffa-741a19331/" target="_blank" rel="noopener">LinkedIn ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
