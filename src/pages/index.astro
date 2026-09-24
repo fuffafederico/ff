@@ -1,0 +1,36 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import CosaFaccio from "../components/CosaFaccio.astro";
+import Competenze from "../components/Competenze.astro";
+import LevraLabs from "../components/LevraLabs.astro";
+import Progetti from "../components/Progetti.astro";
+import Contatti from "../components/Contatti.astro";
+---
+<BaseLayout
+  title="Federico Fuffa — Web Designer & Developer"
+  description="Federico Fuffa, web designer e developer. Progetto siti web e lavoro in Levra Labs occupandomi della gestione di clienti e progetti."
+  path="/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Federico Fuffa",
+      "url": "https://federicofuffa.it/",
+      "email": "mailto:info@federicofuffa.it",
+      "jobTitle": "Web designer e developer",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Levra Labs",
+        "url": "https://levra-labs.it"
+      }
+    })} />
+  </Fragment>
+  <Hero />
+  <CosaFaccio />
+  <Competenze />
+  <LevraLabs />
+  <Progetti />
+  <Contatti />
+</BaseLayout>

@@ -1,0 +1,35 @@
+---
+const skills = [
+  "HTML",
+  "CSS",
+  "JavaScript",
+  "Astro",
+  "Progettazione UI/UX",
+  "Git / GitHub",
+  "npm",
+  "SEO tecnico",
+  "Prestazioni web",
+  "Linux",
+  "Sicurezza web",
+  "Node.js",
+  "PHP",
+  "SQL",
+];
+---
+<section id="competenze">
+  <div class="wrap">
+    <span class="eyebrow">Competenze</span>
+    <h2>Competenze</h2>
+    <div class="skills-slider">
+      <button type="button" class="skills-nav skills-prev" aria-label="Scorri le competenze verso sinistra">&lsaquo;</button>
+      <ul class="skills-track" tabindex="0" aria-label="Elenco competenze, scorribile orizzontalmente">
+        {skills.map((skill) => (
+          <li class="skill-tag">{skill}</li>
+        ))}
+      </ul>
+      <button type="button" class="skills-nav skills-next" aria-label="Scorri le competenze verso destra">&rsaquo;</button>
+    </div>
+  </div>
+</section>
+
+<script src="../scripts/skills-slider.js"></script>
