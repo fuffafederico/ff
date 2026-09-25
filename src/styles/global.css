@@ -7,6 +7,7 @@
   --sans:"Inter Tight",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   --mono:"Geist Mono",ui-monospace,"SF Mono",Menlo,monospace;
   --gut:clamp(20px,4.4vw,64px);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
   --ease:cubic-bezier(.2,.7,.2,1);
 }
 *,*::before,*::after{box-sizing:border-box}
@@ -39,7 +40,10 @@ ol,ul{list-style:none}
 
 /* hero */
 .hero{padding-block:clamp(28px,5vw,64px) clamp(28px,4vw,48px)}
-.hero h1{font-weight:800;font-size:min(19.4vw,17.5rem);line-height:.8;letter-spacing:-.045em;text-transform:uppercase;margin-left:-.04em}
+.hero h1{font-weight:800;font-size:min(19.4vw,17.5rem);line-height:.8;letter-spacing:-.045em;text-transform:uppercase;text-align:center}
+.hero h1 .ln span{font-size:.72em}
+.levra h2 span{font-size:.72em}
+.hero h1 .ln span b,.levra h2 b{font-size:calc(1em/.72);font-weight:800}
 .hero h1 .ln{display:block;overflow:hidden;padding-block:.06em .02em}
 .hero h1 .ln span{display:block;transform:translateY(105%);animation:up 1s var(--ease) forwards}
 .hero h1 .ln:nth-child(2) span{animation-delay:.1s}
@@ -62,7 +66,7 @@ section{padding-block:clamp(64px,10vw,152px) 0}
 .levra::before{content:"";position:absolute;inset:0;background:var(--ink);transform:translateY(101%);transition:transform .6s var(--ease);z-index:-1}
 .levra-in{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(20px,3vw,48px);align-items:end;padding-block:clamp(36px,6vw,88px)}
 .levra .mono{display:block;margin-bottom:clamp(14px,2vw,28px)}
-.levra h2{font-size:min(15.4vw,13.5rem);font-weight:800;line-height:.82;letter-spacing:-.05em;text-transform:uppercase;transition:transform .6s var(--ease)}
+.levra h2{text-align:center;font-size:min(15.4vw,13.5rem);font-weight:800;line-height:.82;letter-spacing:-.05em;text-transform:uppercase;transition:transform .6s var(--ease)}
 .levra-line{margin-top:clamp(18px,2.4vw,32px);font-size:clamp(1.05rem,1.6vw,1.5rem);font-weight:600;letter-spacing:-.015em;max-width:34ch;line-height:1.25}
 .levra .go{display:inline-flex;align-items:center;gap:14px;font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
 .levra .arr{display:inline-grid;place-items:center;width:clamp(56px,7vw,96px);height:clamp(56px,7vw,96px);border:2px solid currentColor;border-radius:50%;font-size:clamp(1.3rem,2.6vw,2.2rem);transition:transform .5s var(--ease),background .3s,color .3s,border-color .3s}
@@ -115,7 +119,8 @@ section{padding-block:clamp(64px,10vw,152px) 0}
 @media(max-width:980px){.skills{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 /* contact */
-.mail{display:inline-block;padding-block:10px;font-size:clamp(1.5rem,6.6vw,6.6rem);font-weight:800;letter-spacing:-.05em;line-height:1;word-break:break-word}
+.frame>div{container-type:inline-size}
+.mail{display:inline-block;white-space:nowrap;padding-block:10px;font-size:min(10.2cqw,6.6rem);font-weight:800;letter-spacing:-.05em;line-height:1}
 .mail.ul{background-size:100% 4px;padding-bottom:10px}
 .mail.ul:hover{background-size:100% .12em}
 .contact-links{margin-top:clamp(24px,3vw,40px);display:flex;flex-wrap:wrap;gap:12px 32px}
@@ -142,3 +147,7 @@ section{padding-block:clamp(64px,10vw,152px) 0}
   .hero-foot{opacity:1}
 }
 
+
+/* subtitles: italic serif */
+.hero-foot,.levra .mono,.levra-line,.perno .mono,.about-meta{font-family:var(--serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:.01em;font-size:1.1rem}
+.levra-line{font-size:clamp(1.15rem,1.7vw,1.6rem);letter-spacing:0}
